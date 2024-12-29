@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Frontend (React)
+  frontend:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend  # Ensure the backend is available before the frontend
+
+  # Backend (Node.js + MongoDB)
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/BlogApp
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo  # Ensure MongoDB is available before starting the backend
+    networks:
+      - app-network
+
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db  # Persist MongoDB data
+    networks:
+      - app-network
+
+# Define a network for the app services
+networks:
+  app-network:
+    driver: bridge
+
+# Volumes to persist MongoDB data
+volumes:
+  mongo-data:

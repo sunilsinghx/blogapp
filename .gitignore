@@ -1,0 +1,44 @@
+# Node.js (Server) specific
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+.DS_Store
+
+# React (Client) specific
+client/node_modules/
+client/build/
+client/.env
+client/.cache/
+client/.next/
+client/package-lock.json
+server/package-lock.json
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+
+
+# Editor-specific files (if using VSCode or others)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.png
+
+# Temporary files
+*.bak
+*.swp
+
+# Docker and other environment files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Build output
+dist/
+build/
+out/
